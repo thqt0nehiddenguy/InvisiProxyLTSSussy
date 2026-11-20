@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm install 26
+        - nvm use 26
+        - corepack enable
+        - corepack prepare pnpm@12.15.0 --activate
+        - pnpm install --frozen-lockfile
+    build:
+      commands:
+        - pnpm run build
+  artifacts:
+    baseDirectory: views/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
